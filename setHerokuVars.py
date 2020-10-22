@@ -21,5 +21,6 @@ with open('javascript/.env.production') as f:
   lines = f.read().split('\n')
   print(lines)
   for line in lines:
-    [key, value] = line.split('=')
-    setVar(key, value)
+    if len(line.split('=')) == 2:
+      [key, value] = line.split('=')
+      setVar(key, value)
