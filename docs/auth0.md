@@ -93,14 +93,51 @@ The instructions below are based on the instructions <a href="https://developers
 
 Before you start, get the Auth0 domain loaded in one of your browser tabs; you can find it by navigating to your account on <https://auth0.com>, clicking on "Applications in the side bar, locating one of the specific applications you created (e.g. `test-demo-spring-react-app` and then locating `Auth0 Domain` as a field in the settings tab. This "domain" is consistant across all applications in your tenant.
 
+You'll need to create a new Google Project in which to create your Google OAuth App. You can do so by following these instructions:
+
+1. Navigate to https://console.developers.google.com/projectcreate and log in with your UCSB Google Account.
+2. Name your project `ucsb-cs156-f20-yourgithubid`. An example is shown below:
+
+![google project creation screen](./images/auth0-google-project-create-screen-1.png)
+
+3. We now need to create an OAuth consent screen by visiting https://console.developers.google.com/apis/credentials?project=ucsb-cs156-f20-yourgithubid (remember to change the end of the URL with your project name instead of `ucsb-cs156-f20-yourgithubid`). Click on the **Configure Consent Button** button on the right side of the page:
+
+![google oauth consent screen 0](./images/google-oauth-consent-create-screen-0.png)
+
+4. Select the **External** option for your user type.
+5. You are now going to set the following required fields on the next screen according to the table below:
+
+| field name                                                  | field value                                                          |
+| ----------------------------------------------------------- | -------------------------------------------------------------------- |
+| App name                                                    | `jpa03-yourgithubid`, changing out `yourgithubid` for your GitHub id |
+| User support email                                          | your ucsb email                                                      |
+| Developer contact email address (final field at the bottom) | your ucsb email                                                      |
+
+![google oauth consent screen 1.1](./images/google-oauth-consent-create-screen-1-1.png)
+![google oauth consent screen 1.2](./images/google-oauth-consent-create-screen-1-2.png)
+
+6.  Click save and continue to complete the first page.
+7.  On the second page, click the **Add or Remove Scopes** button, and select the scopes shown below:
+
+![google oauth consent screen 2.1](./images/google-oauth-consent-create-screen-2-1.png)
+
+8. After hitting **Update**, your scopes page should appear as follows:
+   ![google oauth consent screen 2.2](./images/google-oauth-consent-create-screen-2-2.png)
+
+9. Click **Save and Continue** on the second page.
+10. Click **Save and Continue** on the third page. You do not need to fill anything out here.
+11. Click **Back to Dashboard** on the fourth and final page.
+
+Now that the project exists with a configured OAuth consent screen, we can create the Oauth App.
+
 1. Navigate to page <a href="https://developers.google.com/identity/sign-in/web/sign-in" target="_blank">Google OAuth Instructions</a> and click where it says "Go to the Credentials Page".
-2. Click `Create credentials > OAuth client ID.`
-3. Select the `Web application` application type.
-4. Name your OAuth 2.0 client (e.g. `test-demo-spring-react-app`).
-5. Add an authorized JavaScript origin with the value `https://<Auth0 Domain>`.
-6. Add an authorized redirect URI, with the value `https://<Auth0 Domain>/login/callback`, replacing `<Auth0 Domain>` with the `Auth0 Domain` listed in the Auth0 settings for your app. (It should look something like: `https://dev-pfjsl7rp.auth0.com/login/callback`, without the `<>` in it.)
-7. Scroll down and click "Create" to create your Google OAuth App.
-8. You should see a pop-up with a "Client ID" and "Client Secret"; _leave this browser tab open for a moment_. You will need to copy these values in the next step.
+1. Click `Create credentials > OAuth client ID.`
+1. Select the `Web application` application type.
+1. Name your OAuth 2.0 client (e.g. `test-demo-spring-react-app`).
+1. Add an authorized JavaScript origin with the value `https://<Auth0 Domain>`.
+1. Add an authorized redirect URI, with the value `https://<Auth0 Domain>/login/callback`, replacing `<Auth0 Domain>` with the `Auth0 Domain` listed in the Auth0 settings for your app. (It should look something like: `https://dev-pfjsl7rp.auth0.com/login/callback`, without the `<>` in it.)
+1. Scroll down and click "Create" to create your Google OAuth App.
+1. You should see a pop-up with a "Client ID" and "Client Secret"; _leave this browser tab open for a moment_. You will need to copy these values in the next step.
 
 Now, return to the browser tab open to your Auth0 application.
 
