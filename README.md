@@ -1,8 +1,47 @@
-# Demo Spring React App
+# STARTER-lab03
+
+
+* TODO: Change the title of this README 
+  in the text `# STARTER-jpa03` above
+  to match the name of your repo, i. e., `jpa03-yourgithubid`, then delete
+  this TODO item.
+
+* TODO: Correct the links to repo below, 
+  then delete this TODO.  Replace it with 
+  a link to your repo, e.g. 
+  https://github.com/ucsb-cs156-f20/jpa03-cgaucho
+
+Repo: https://ucsb-cs156-f20/STARTER-jpa03
+
+* TODO: Correct the links to app on Heroku below, 
+  then delete this TODO.  Replace it with 
+  a link to your running app on Heroku, e.g.
+  https://cs156-f20-jpa03-cgaucho.herokuapp.com
+
+
+On Heroku: https://cs156-f20-jpa03-cgaucho.herokuapp.com
+
+* TODO: Correct the links to codecov report below
+  then delete this TODO.  Replace it with 
+  a link to your codecov report.  Fix the URLs in the codecov
+  badge markup below as well so that the badge links to your
+  correct codecov report.
+
+On Codecov: https://codecov.io/gh/ucsb-cs156-f20/jpa03-cgaucho
 
 [![codecov](https://codecov.io/gh/ucsb-cs156-f20/demo-spring-react-todo-app/branch/main/graph/badge.svg)](https://codecov.io/gh/ucsb-cs156-f20/demo-spring-react-todo-app)
 
-A demo todo app with Spring Boot and Create React App.
+
+# About this Repo: Demo Spring React App
+
+This is a demo todo app with Spring Boot and Create React App.
+
+This version was created as a branch off of version 1.1.0 of the code
+in this repo, which has ongoing development.   By the time you
+work with this starter code, the code in this original repo may
+have further commits, features, bug fixes, etc.
+
+* <git@github.com:ucsb-cs156-f20/demo-spring-react-todo-app.git>
 
 ## Getting started
 
