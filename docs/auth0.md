@@ -96,7 +96,7 @@ Before you start, get the Auth0 domain loaded in one of your browser tabs; you c
 You'll need to create a new Google Project in which to create your Google OAuth App. You can do so by following these instructions:
 
 1. Navigate to https://console.developers.google.com/projectcreate and log in with your UCSB Google Account.
-2. Name your project `ucsb-cs156-f20-yourgithubid`. An example is shown below:
+2. Name your project `ucsb-cs156-f20-yourgithubid`, select `ucsb.edu` as your organization, and `UnPaid` as your Location. An example is shown below:
 
 ![google project creation screen](./images/auth0-google-project-create-screen-1.png)
 
@@ -104,29 +104,18 @@ You'll need to create a new Google Project in which to create your Google OAuth 
 
 ![google oauth consent screen 0](./images/google-oauth-consent-create-screen-0.png)
 
-4. Select the **External** option for your user type.
+4. Select the **Public** option for your user type.
 5. You are now going to set the following required fields on the next screen according to the table below:
 
-| field name                                                  | field value                                                          |
-| ----------------------------------------------------------- | -------------------------------------------------------------------- |
-| App name                                                    | `jpa03-yourgithubid`, changing out `yourgithubid` for your GitHub id |
-| User support email                                          | your ucsb email                                                      |
-| Developer contact email address (final field at the bottom) | your ucsb email                                                      |
+| field name         | field value                                                          |
+| ------------------ | -------------------------------------------------------------------- |
+| App name           | `jpa03-yourgithubid`, changing out `yourgithubid` for your GitHub id |
+| Support email      | your ucsb email                                                      |
+| Authorized Domains | `auth0.com`                                                          |
 
-![google oauth consent screen 1.1](./images/google-oauth-consent-create-screen-1-1.png)
-![google oauth consent screen 1.2](./images/google-oauth-consent-create-screen-1-2.png)
+![google oauth consent screen](./images/google-oauth-consent-create-screen.png)
 
-6.  Click save and continue to complete the first page.
-7.  On the second page, click the **Add or Remove Scopes** button, and select the scopes shown below:
-
-![google oauth consent screen 2.1](./images/google-oauth-consent-create-screen-2-1.png)
-
-8. After hitting **Update**, your scopes page should appear as follows:
-   ![google oauth consent screen 2.2](./images/google-oauth-consent-create-screen-2-2.png)
-
-9. Click **Save and Continue** on the second page.
-10. Click **Save and Continue** on the third page. You do not need to fill anything out here.
-11. Click **Back to Dashboard** on the fourth and final page.
+6.  Click save.
 
 Now that the project exists with a configured OAuth consent screen, we can create the Oauth App.
 
