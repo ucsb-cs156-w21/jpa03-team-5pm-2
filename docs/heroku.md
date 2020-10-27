@@ -39,6 +39,14 @@ cp secrets-heroku.properties.SAMPLE secrets-heroku.properties
    running Heroku apps as "Environment Variables".
 
    This can be done by hand, but it is a tedious and error-prone process.
+
+   If you need to do it by hand, then you should set up the following configuration variables.
+   | Key | Value |
+   | `HEROKU_PROPERTIES` | The entire contents of `secrets-heroku.properties`. Yes, the _entire_ contents, all under this variable. |
+   | `REACT_APP_AUTH0_DOMAIN` | The same value it is assigned in `javascript/.env.production` |
+   | `REACT_APP_AUTH0_CLIENT_ID` | The same value it is assigned in `javascript/.env.production` |
+   | `REACT_APP_AUTH0_AUDIENCE` | The same value it is assigned in `javascript/.env.production` |
+
    A better way is to use the script provided below; be aware, though, that this
    script requires two pre-requisites to be installed on your local system:
 
