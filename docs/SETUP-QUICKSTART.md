@@ -58,11 +58,13 @@ Add to `temp-credentials.txt`, as in this example:
  
 
 ```
-heroku.app: ucsb-cgaucho-dsr-minimal
-heroku.url: https://ucsb-cgaucho-dsr-minimal.herokuapp.com
+heroku.app: jpa03-cgaucho
+heroku.url: https://jpa03-cgaucho.herokuapp.com
 auth0.tenant: 
 auth0.domain:
 auth0.clientId: 
+google.clientId:
+google.clientSecret: 
 ```
 
 ## Step 2: Create an Auth0.com Account and/or Tenant
@@ -90,9 +92,9 @@ in the appropriate fields, noting that:
 
 | Field                 | Value                                        |
 | --------------------- | -------------------------------------------- |
-| Allowed Callback URLs | http://localhost:3000, http://localhost:8080, https://ucsb-cgaucho-dsr-minimal.herokuapp.com |
-| Allowed Logout URLs   | http://localhost:3000, http://localhost:8080, https://ucsb-cgaucho-dsr-minimal.herokuapp.com |
-| Allowed Web Origins   | http://localhost:3000, http://localhost:8080, https://ucsb-cgaucho-dsr-minimal.herokuapp.com |
+| Allowed Callback URLs | http://localhost:3000, http://localhost:8080, https://jpa03-cgaucho.herokuapp.com |
+| Allowed Logout URLs   | http://localhost:3000, http://localhost:8080, https://jpa03-cgaucho.herokuapp.com |
+| Allowed Web Origins   | http://localhost:3000, http://localhost:8080, https://jpa03-cgaucho.herokuapp.com |
 
 Make sure to scroll down and click "Save Changes" at the bottom of the page.
 
@@ -113,7 +115,8 @@ At this point, you should be able to find the value for for `Domain` and `Client
 Your `temp-credentials.txt` file should now look something like this:
 
 ```
-heroku.app: ucsb-cgaucho-dsr-minimal
+heroku.app: jpa03-cgaucho
+heroku.url: https://jpa03-cgaucho.herokuapp.com
 auth0.tenant: ucsb-cs156-cgaucho
 auth0.domain: ucsb-cs156-cgaucho.us.auth0.com
 auth0.clientid: 6KoPsWMM2A27PjAejHHWTXApra8CVQ6C
@@ -132,8 +135,8 @@ First, click on the `Create API` button.
 Next, fill in the fields as follows:
 | Field name | Value | Description |
 |------------|-------|-------------|
-| Name | The name of your application | This is just a visual name for the Auth0 API of your application, and in principle it could be anything.  But to help keep things organized, we'll use the same value that we used for the `heroku.app`,   Example `ucsb-cgaucho-dsr-minimal`|
-| Identifier | Copy your heroku.url into this field also; i.e. `ucsb-cgaucho-dsr-minimal` | This will end up serving as the `Audience` value. |
+| Name | The name of your application | This is just a visual name for the Auth0 API of your application, and in principle it could be anything.  But to help keep things organized, we'll use the same value that we used for the `heroku.app`,   Example `jpa03-cgaucho`|
+| Identifier | Copy your heroku.url into this field also; i.e. `https://jpa03-cgaucho.herokuapp.com` | This will end up serving as the `Audience` value. |
 | Signing algorithm | RS256 | This determines what cryptographic algorithm is used to verify tokens. The standard is RS256, so we use that here |
 
 It should end up looking like the below image (with your application name):
@@ -161,13 +164,13 @@ application. Accordingly, we are putting this step only into the
 
 In Auth0.com go to the left hand sidebar and click `Rules`, then click `Create Rule`. Select `Empty Rule` at the top.
 
-The default name for your rule is `Empty Rule`.  We suggest you change this name to match `heroku.app`, the name of your application (e.g. `ucsb-cgaucho-dsr-minimal` ).
+The default name for your rule is `Empty Rule`.  We suggest you change this name to match `heroku.url`, the name of your application (e.g. `jpa03-cgaucho` ).
 
-This brings up a block of JavaScript code for you to edit.  Replace the code with this entire block of code, but _with the string_ `ucsb-cgaucho-dsr-minimal` _replaced with your_ `heroku.app` _name_:
+This brings up a block of JavaScript code for you to edit.  Replace the code with this entire block of code, but _with the string_ `"https://jpa03-cgaucho.herokuapp.com"` _replaced with your full_ `heroku.url` :
 
 ```javascript
 function (user, context, callback) {
-   context.accessToken["ucsb-cgaucho-dsr-minimal"]={
+   context.accessToken["https://jpa03-cgaucho.herokuapp.com"]={
     "email" : user.email,
     "given_name" : user.given_name,
     "family_name" : user.family_name
@@ -195,11 +198,11 @@ Edit the `secrets-localhost.properties` file, filling in values as shown here:
 
 | Key | Example value | Explanation | Copy from corresponding value in `temp-credentials.txt` for |
 |-----|---------------|-------------|---|
-| `app.namespace` | `https://ucsb-cgaucho-dsr-minimal.herokuapp.com` | The name you gave to your app on Heroku |  `heroku.url` |
+| `app.namespace` | `https://jpa03-cgaucho.herokuapp.com` | The name you gave to your app on Heroku |  `heroku.url` |
 | `app.admin.emails` | `phtcon@ucsb.edu,youremail@ucsb.edu` | A comma separated list of emails for admins for the app.  Add your email. |  (none) |
 | `auth0.domain` | `ucsb-cs156-cgaucho.us.auth0.com` | The DNS hostname used to access Auth0 services; starts wtih the name of your tenant, and ends with something like `.us.auth0.com` |  `auth0.domain` |
 | `auth0.clientId` | `6KoPsWMM2A27PjAejHHWTXApra8CVQ6C` | The value that identifies the specific Auth0 application from your tenant |  `auth0.clientId` |
-| `security.oauth2.resource.id` | `https://ucsb-cgaucho-dsr-minimal.herokuapp.com` | Copy the same value as `app.namespace`  |  `heroku.url` |
+| `security.oauth2.resource.id` | `https://jpa03-cgaucho.herokuapp.com` | Copy the same value as `app.namespace`  |  `heroku.url` |
 |`security.oauth2.resource.jwk.keySetUri`| (no change)| Leave unchanged from value in `.SAMPLE` file | | 
 
 Next, you will edit the `javascript/.env.local` file with your
@@ -209,7 +212,7 @@ preferred text editor, and fill in the values as shown below:
 |-----|---------------|-------------|---|
 |`REACT_APP_AUTH0_DOMAIN`| `ucsb-cs156-cgaucho.us.auth0.com` | The DNS hostname used to access Auth0 services; starts wtih the name of your tenant, and ends with something like `.us.auth0.com` |  `auth0.domain` |
 |`REACT_APP_AUTH0_CLIENT_ID`| `6KoPsWMM2A27PjAejHHWTXApra8CVQ6C`| The value that identifies the specific Auth0 application from your tenant |  `auth0.clientId` |
-|`REACT_APP_AUTH0_AUDIENCE`| `https://ucsb-cgaucho-dsr-minimal.herokuapp.com` | The name you gave to your app on Heroku (used here to identify which Auth0 API we are using)`heroku.url` |
+|`REACT_APP_AUTH0_AUDIENCE`| `https://jpa03-cgaucho.herokuapp.com` | The name you gave to your app on Heroku (used here to identify which Auth0 API we are using)`heroku.url` |
 
 At this point, you should be able to run the app on localhost with the command:
 
