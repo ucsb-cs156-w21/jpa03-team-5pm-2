@@ -88,7 +88,7 @@ heading `Application URIs.
 * Fill in these values 
 in the appropriate fields, noting that:
   * The URL values that include the word `localhost` start with `http`, while the ones that contain `herokuapp` start with `https`. 
-  * The value `ucsb-cgaucho-dsr-minimal` should be replaced in EVERY case with the actual value you used for   `heroku_app_name` in your `temp-credentials.txt`; it should not literally be `ucsb-cgaucho-dsr-minimal`.
+  * The value `jpa03-cgaucho` should be replaced in EVERY case with the actual value you used for   `heroku_app_name` in your `temp-credentials.txt`; it should not literally be `jpa03-cgaucho`.
 
 | Field                 | Value                                        |
 | --------------------- | -------------------------------------------- |
@@ -264,12 +264,12 @@ Now, run the python script to update these values on Heroku.
    (If you need help with installing the HEROKU CLI, see the Step 8b of the [SETUP-FULL.md](./SETUP-FULL.md) version.) 
 
 2. Then run this command, substituting the 
-   * name of your value for `heroku.app` in place of `ucsb-cs156-dsr-minimal`
+   * name of your value for `heroku.app` in place of `jpa03-cgaucho`
    * the exact command your system uses for Python&nbsp;3 scripts in place of `python3`
 
 ```bash
    heroku login -i
-   python3 setHerokuVars.py ucsb-cs156-dsr-minimal
+   python3 setHerokuVars.py jpa03-cgaucho
 ```
 
 After doing this, if you visit you app on the Heroku dashboard (<https://dashboard.heroku.com>), go to the Settings tab, click "Reveal Config Vars", and look for the value of the variable `SPRING_PROPERTIES`, you should see the values from your file reflected there.

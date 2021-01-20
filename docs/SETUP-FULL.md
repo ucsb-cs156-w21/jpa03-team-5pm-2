@@ -242,8 +242,8 @@ First, click on the `Create API` button.
 Next, fill in the fields as follows:
 | Field name | Value | Description |
 |------------|-------|-------------|
-| Name | The name of your application | This is just a visual name for the Auth0 API of your application, and in principle it could be anything.  But to help keep things organized, we'll use the same value that we used for the `heroku.app`,   Example `ucsb-cgaucho-dsr-minimal`|
-| Identifier | Copy your full heroku url into this field; e.g. `https://ucsb-cgaucho-dsr-minimal.herokuapp.com` | This will end up serving as the "audience" value, the "key" that identifies custom claims in the JWT token. |
+| Name | The name of your application | This is just a visual name for the Auth0 API of your application, and in principle it could be anything.  But to help keep things organized, we'll use the same value that we used for the `heroku.app`,   Example `jpa03-cgaucho`|
+| Identifier | Copy your full heroku url into this field; e.g. `https://jpa03-cgaucho.herokuapp.com` | This will end up serving as the "audience" value, the "key" that identifies custom claims in the JWT token. |
 | Signing algorithm | RS256 | This determines what cryptographic algorithm is used to verify tokens. The standard is RS256, so we use that here |
 
 It should end up looking like the below image (with your application name):
@@ -272,7 +272,7 @@ username--which we can do with your UCSB username.
 The instructions below are based on the instructions <a href="https://developers.google.com/identity/sign-in/web/sign-in" target="_blank">here</a>.
 
 You'll need the values from your `temp-credentials.txt` file for:
-* `heroku.app` (e.g. `ucsb-cgaucho-dsr-minimal`)
+* `heroku.app` (e.g. `jpa03-cgaucho`)
 * `auth0.tenant` (e.g.`ucsb-cs156-cgaucho`) 
 * `auth0.domain` (e.g. `ucsb-cs156-cgaucho.us.auth0.com`)
 so, have those handy.
@@ -288,7 +288,7 @@ so, have those handy.
    project.
 2. Click `Create credentials > OAuth client ID.`
 3. For the `User Type`, click `Internal` then click `Create`
-4. For the `App Name`, enter your the value you chose for `heroku.app`, e.g. `ucsb-cgaucho-dsr-minimal` 
+4. For the `App Name`, enter your the value you chose for `heroku.app`, e.g. `jpa03-cgaucho` 
 5. For the `User Support Email` put in your own `@ucsb.edu` email address. You can leave the other fields with their default values.
 6. There is a button to "Add or Remove Scopes".  Please click the buttons beside `auth/userinfo/email` and `auth/userinfo/profile`, then click `Update`
 7. Return to the screen where you can click to  `Create credentials > OAuth client ID.`
