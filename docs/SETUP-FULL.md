@@ -73,19 +73,22 @@ a Heroku application name.
 
 You should do this even if you plan, right now, only to get the application running on localhost.
 
-Login to Heroku.com and choose an application name. Since application
-names are a global name space, to avoid collisions, we suggest that you
-prefix your application name with `ucsb-cgaucho-` where `cgaucho` is your UCSB email, with the following conversions:
+Login to Heroku.com and choose an application name. 
+
+For jpa03, we suggest that your application name be `jpa03-ucsbnetid` where
+* `ucsbnetid` is your UCSBNetId, i.e. the part of your `@ucsb.edu` email address that comes before `@ucsb.edu`
+
+As in jpa02, make the following adjustments:
 * upper case letters become lowercase (e.g `Gaucho4Life` becomes `gaucho4life`)
 * underscores become hyphens (e.g. `Del_Playa` becomes `del-playa`)
 * dots become hyphens (`Chris.Gaucho` becomes `chris-gaucho`)
 
-Note that there is also a 30 character limit for Herokuapp names. 
-* Example: `ucsb-cgaucho-demo-spring-react-minimal` is too long
-* Alternatives to consider: `ucsb-cgaucho-dsr-minimal` or `ucsb-cgaucho-demo-spr-react`
+If it is necessary to make some other adjustments, in the case of `jpa03` it doesn't matter since we are not
+autograding this assignment with Gradescope.  But in general, please try to follow the conventions provided.
 
-Enter this into Heroku.com to create a new application as shown below.  The eventual URL of this application is now, for example `ucsb-cgaucho-dsr-minimal.herokuapp.com`
+Enter this into Heroku.com to create a new application as shown below.  
 
+If your app name is, for example, `jpa03-cgaucho`, then the eventual URL of this application is now, for example `https://jpa03-cgaucho.herokuapp.com`
 
 ![Create new app on Heroku](./images/heroku-new-app.gif)
 
@@ -93,8 +96,8 @@ Then enter this name for the value `heroku.app` in your `temp-credentials.txt`, 
 so that the file looks something like this:
 
 ```
-heroku.app: ucsb-cgaucho-dsr-minimal
-heroku.url: https://ucsb-cgaucho-dsr-minimal.herokuapp.com
+heroku.app: jpa03-cgaucho
+heroku.url: https://jpa03-cgaucho.herokuapp.com
 auth0.tenant: 
 auth0.domain:
 auth0.clientId: 
@@ -152,7 +155,8 @@ If you've been following up to this point, you should have value
 like this in your `temp-credentials.txt`:
 
 ```
-heroku.app: ucsb-cgaucho-dsr-minimal
+heroku.app: jpa03-cgaucho
+heroku.url: https://jpa03-cgaucho.herokuapp.com
 auth0.tenant: ucsb-cs156-cgaucho
 auth0.domain:
 auth0.clientId: 
@@ -188,9 +192,9 @@ Note the following:
 
 | Field                 | Value                                        |
 | --------------------- | -------------------------------------------- |
-| Allowed Callback URLs | http://localhost:3000, http://localhost:8080, https://ucsb-cgaucho-dsr-minimal.herokuapp.com |
-| Allowed Logout URLs   | http://localhost:3000, http://localhost:8080, https://ucsb-cgaucho-dsr-minimal.herokuapp.com |
-| Allowed Web Origins   | http://localhost:3000, http://localhost:8080, https://ucsb-cgaucho-dsr-minimal.herokuapp.com |
+| Allowed Callback URLs | http://localhost:3000, http://localhost:8080, https://jpa03-cgaucho.herokuapp.com |
+| Allowed Logout URLs   | http://localhost:3000, http://localhost:8080, https://jpa03-cgaucho.herokuapp.com |
+| Allowed Web Origins   | http://localhost:3000, http://localhost:8080, https://jpa03-cgaucho.herokuapp.com |
 
 
 Make sure to scroll down and click "Save Changes" at the bottom of the page.
@@ -217,7 +221,8 @@ At this point, you should be able to find the value for for `Domain` and `Client
 Your `temp-credentials.txt` file should now look something like this:
 
 ```
-heroku.app: ucsb-cgaucho-dsr-minimal
+heroku.app: jpa03-cgaucho
+heroku.url: https://jpa03-cgaucho.herokuapp.com
 auth0.tenant: ucsb-cs156-cgaucho
 auth0.domain: ucsb-cs156-cgaucho.us.auth0.com
 auth0.clientid: 6KoPsWMM2A27PjAejHHWTXApra8CVQ6C
@@ -336,15 +341,15 @@ In Auth0.com go to the left hand sidebar and click `Rules`, then click `Create R
 
 There is a function that takes a user, a context, and a callback. Context has an access token as a property. User has all of the user information. We want to add a property to `context.accessToken`.
 
-To do this, add the following code, _being sure to change_ where it says `"ucsb-cgaucho-dsr-minimal"`, replacing that with your value for the name
-of your heroku app (the value of `heroku.app` in your `temp-credentials.txt` file).   If this does not match the values that you fill in later
+To do this, add the following code, _being sure to change_ where it says `""https://jpa03-cgaucho.herokuapp.com""`, replacing that with your value for the name
+of your heroku app (the value of `heroku.url` in your `temp-credentials.txt` file).   If this does not match the values that you fill in later
 for `REACT_APP_AUTH0_AUDIENCE` (which we should also be the value of `heroku.app` in your `temp-credentials.txt` file) then things will not work properly.
 
 Insert this code into the template for the custom claim, replacing the
 line that says: `// TODO: implement your rule`
 
 ```javascript
-context.accessToken["ucsb-cgaucho-dsr-minimal"]={
+context.accessToken["https://jpa03-cgaucho.herokuapp.com"]={
   "email" : user.email,
   "given_name" : user.given_name,
   "family_name" : user.family_name
@@ -355,7 +360,7 @@ The whole thing should look something like this when you are done:
 
 ```javascript
 function (user, context, callback) {
-   context.accessToken["ucsb-cgaucho-dsr-minimal"]={
+   context.accessToken["https://jpa03-cgaucho.herokuapp.com"]={
     "email" : user.email,
     "given_name" : user.given_name,
     "family_name" : user.family_name
@@ -408,11 +413,11 @@ preferred text editor, and fill in the values as shown below:
 
 | Key | Example value | Explanation | Copy from corresponding value in `temp-credentials.txt` for |
 |-----|---------------|-------------|---|
-| `app.namespace` | `https://ucsb-cgaucho-dsr-minimal.herokuapp.com` | The name you gave to your app on Heroku |  `heroku.url` |
+| `app.namespace` | `https://jpa03-cgaucho.herokuapp.com` | The name you gave to your app on Heroku |  `heroku.url` |
 | `app.admin.emails` | `phtcon@ucsb.edu,youremail@ucsb.edu` | A comma separated list of emails for admins for the app.  Add your email. |  (none) |
 | `auth0.domain` | `ucsb-cs156-cgaucho.us.auth0.com` | The DNS hostname used to access Auth0 services; starts wtih the name of your tenant, and ends with something like `.us.auth0.com` |  `auth0.domain` |
 | `auth0.clientId` | `6KoPsWMM2A27PjAejHHWTXApra8CVQ6C` | The value that identifies the specific Auth0 application from your tenant |  `auth0.clientId` |
-| `security.oauth2.resource.id` | `https://ucsb-cgaucho-dsr-minimal.herokuapp.com` | Copy the same value as `app.namespace`  |  `heroku.url` |
+| `security.oauth2.resource.id` | `https://jpa03-cgaucho.herokuapp.com` | Copy the same value as `app.namespace`  |  `heroku.url` |
 |`security.oauth2.resource.jwk.keySetUri`| (no change)| Leave unchanged from value in `.SAMPLE` file | | 
 
 Next, you will edit the `javascript/.env.local` file with your
@@ -422,7 +427,7 @@ preferred text editor, and fill in the values as shown below:
 |-----|---------------|-------------|---|
 |`REACT_APP_AUTH0_DOMAIN`| `ucsb-cs156-cgaucho.us.auth0.com` | The DNS hostname used to access Auth0 services; starts wtih the name of your tenant, and ends with something like `.us.auth0.com` |  `auth0.domain` |
 |`REACT_APP_AUTH0_CLIENT_ID`| `6KoPsWMM2A27PjAejHHWTXApra8CVQ6C`| The value that identifies the specific Auth0 application from your tenant |  `auth0.clientId` |
-|`REACT_APP_AUTH0_AUDIENCE`| `https://ucsb-cgaucho-dsr-minimal.herokuapp.com` | The name you gave to your app on Heroku (used here to identify which Auth0 API we are using)`heroku.url` |
+|`REACT_APP_AUTH0_AUDIENCE`| `https://jpa03-cgaucho.herokuapp.com` | The name you gave to your app on Heroku (used here to identify which Auth0 API we are using)`heroku.url` |
 
 At this point, you should be able to run the app on localhost with the command:
 
