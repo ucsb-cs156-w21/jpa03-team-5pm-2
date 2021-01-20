@@ -11,12 +11,6 @@ Repo: https://github.com/ucsb-cs156-w21/jpa03-team-5pm-2
 
 On Heroku: https://jpa03-cgaucho.herokuapp.com
 
-* TODO: Correct the links to codecov report below
-  then delete this TODO.  Replace it with 
-  a link to your codecov report.  Fix the URLs in the codecov
-  badge markup below as well so that the badge links to your
-  correct codecov report.
-
 On Codecov: https://codecov.io/gh/ucsb-cs156-w21/jpa03-team-5pm-2
 
 [![codecov](https://codecov.io/gh/ucsb-cs156-w21/jpa03-team-5pm-2/branch/main/graph/badge.svg)](https://codecov.io/gh/ucsb-cs156-w21/jpa03-team-5pm-2)
