@@ -32,52 +32,55 @@ On Codecov: https://codecov.io/gh/ucsb-cs156-f20/jpa03-cgaucho
 [![codecov](https://codecov.io/gh/ucsb-cs156-f20/demo-spring-react-todo-app/branch/main/graph/badge.svg)](https://codecov.io/gh/ucsb-cs156-f20/demo-spring-react-todo-app)
 
 
-# About this Repo: Demo Spring React App
+## Integrations
 
-This is a demo todo app with Spring Boot and Create React App.
+* The npm package `prettier` is used to implement a pre-commit hook that formats JavaScript code.  See: [docs/prettier.md](./docs/prettier.md) for more information.
 
-This version was created as a branch off of version 1.1.0 of the code
-in this repo, which has ongoing development.   By the time you
-work with this starter code, the code in this original repo may
-have further commits, features, bug fixes, etc.
+## Getting Started
 
-* <git@github.com:ucsb-cs156-f20/demo-spring-react-todo-app.git>
+To get started with this application, you'll need to be able to
+* Run it locally (i.e. on localhost)
+* Deploy it to Heroku
+* Get the test cases running on GitHub Actions
+* See aggregrated code coverage statistics on Codecov
 
-## Getting started
+This application has integrations with the following third-party
+services that require configuration
+* Auth0.com (for authentication)
+* Google (for authentication)
+* A postgres database provisioned on Heroku
 
-The first thing you'll want to do is set up your Auth0 SPA App. Instructions for setting up auth0 can be found [here](./docs/auth0.md).
+All of the setup steps for running the app on localhost and Heroku are described in these  file: 
+* [./docs/SETUP-FULL.md](./docs/SETUP-FULL.md) if it is your first time setting up a Spring/React app with Auth0 and Google
+* [./docs/SETUP-QUICKSTART.md](./docs/SETUP-QUICKSTART.md) if you've done these steps before.
 
-- As part of these instructions, you will have created `javascript/.env.local` from `javascript/.env.local.SAMPLE`
-- Next, run this command to create a secrets file for the backend when running on localhost:
-  ```bash
-  cp secrets-localhost.properties.SAMPLE secrets-localhost.properties
-  ```
-- Next, you need update the values in your new `secrets-localhost.properties`. You can copy the corresponding values from the `javascript/.env.local`,
-  using this guide:
-
-  | For this value in `secrets-localhost.properties` | Use this value from `javascript/.env.local` |
-  | ------------------------------------------------ | ------------------------------------------- |
-  | `auth0.domain`                                   | `REACT_APP_AUTH0_DOMAIN`                    |
-  | `auth0.clientId`                                 | `REACT_APP_AUTH0_CLIENT_ID`                 |
-  | `security.oauth2.resource.id`                    | `REACT_APP_AUTH0_AUDIENCE`                  |
-
-  You may see additional values in `secrets-localhost.properties` such as the ones below. You do not need to adjust these; leave the values alone.
-
-  ```
-  security.oauth2.resource.jwk.keySetUri=https://${auth0.domain}/.well-known/jwks.json
-  ```
-
-At this point, you should be able to run the app locally via
-
-```bash
-mvn spring-boot:run
-```
-
-## Deploying to Production
-
-To deploy to production on Heroku, see: [./docs/heroku.md](./docs/heroku.md)
-
-## Setting up GitHub Actions
+## Setting up GitHub Actions (CI/CD, CodeCov)
 
 To setup GitHub Actions so that the tests pass, you will need to configure
 some _secrets_ on the GitHub repo settings page; see: [./docs/github-actions-secrets.md](./docs/github-actions-secrets.md) for details.
+
+This file also describes the setup for Codecov
+
+## Property file values
+
+This section serves as a quick reference for values found in these files: 
+* [`application.properties`](./src/main/resources/application.properties)
+* [`secrets-localhost.properties`](./secrets-localhost.properties.SAMPLE)
+* [`secrets-heroku.properties`](./secrets-heroku.properties.SAMPLE)
+
+| Property name                                                     | Heroku only? | Explanation                                                               |
+| ----------------------------------------------------------------- | ------------ | ------------------------------------------------------------------------- |
+| `app.namespace`                                                   |              | See `Getting Started` below                                               |
+| `app.admin.emails`                                                |              | A comma separated list of email addresses of permanent admin users.       |
+| `app.member.hosted-domain`                                        |              | The email suffix that identifies members (i.e. `ucsb.edu` vs `gmail.com`) |
+| `auth0.domain`                                                    |              | See `Getting Started` below                                               |
+| `auth0.clientId`                                                  |              | See `Getting Started` below                                               |
+| `security.oauth2.resource.id`                                     |              | Should always be `${app.namespace}/api`                                   |
+| `security.oauth2.resource.jwk.keySetUri`                          |              | Should always be `https://\${auth0.domain}/.well-known/jwks.json`         |
+| `spring.jpa.database-platform`                                    | Yes          | Should always be `org.hibernate.dialect.PostgreSQLDialect`                |
+| `spring.datasource.driver-class-name`                             | Yes          | Should always be `org.postgresql.Driver`                                  |
+| `spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults` | Yes          | Should always be `false`                                                  |
+| `spring.datasource.url`                                           | Yes          | Should always be `${JDBC_DATABASE_URL}`                                   |
+| `spring.datasource.username`                                      | Yes          | Should always be `${JDBC_DATABASE_USERNAME}`                              |
+| `spring.datasource.password`                                      | Yes          | Should always be `${JDBC_DATABASE_PASSWORD}`                              |
+| `spring.jpa.hibernate.ddl-auto`                                   | Yes          | Should always be `update`                                                 |
